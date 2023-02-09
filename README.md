@@ -15,7 +15,7 @@
 
 ### How we verify
 The URL you submit is searched through the [authifyFame Database](https://github.com/authifyWeb/authifyFame-Database) and if the entire domain matches with any in the list, we'll show the link is verified. When we show we weren't able to able to verify, it only means, that particular link is not in the database, but better take a more assisted approach rather than submitting data or process payments. 
-You can request your profile to be included that link in our database by sending an email to 'authifylabs@proton.me' from their official email address. You can also raise a request [here](https://github.com/authifyWeb/authifyLabs-Database/issues) with the link to your main social media profile. We'll contact the company and make sure it is a valid url and include it in our database.
+You can request your profile to be included that link in our database by sending an email to 'authifylabs@proton.me' from their official email address. You can also raise a request [here](https://github.com/authifyWeb/authifyFame-Database/issues) with the link to your main social media profile. We'll contact the company and make sure it is a valid url and include it in our database.
 
 
 ### How To Trust the source
