@@ -2,7 +2,7 @@
 
 <div align=center> <h3> <a href ="https://fame.authifyWeb.com/"> authifyFame</a> is a free service to make sure that a URL or a website you are visiting belongs to a celeb or belongs to a digital creator and not a phoney scammer's phishing scam.  <h3> </div>
 
-#### authifyURL get data from [authifyURL-Database](https://github.com/authifyWeb/authifyFame-Database)
+#### authifyFame get data from [authifyFame-Database](https://github.com/authifyWeb/authifyFame-Database)
 
 ## <ins>Quick Links</ins>
 * [Website](https://fame.authifyweb.com/)
