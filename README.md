@@ -8,7 +8,7 @@
 * [Website](https://fame.authifyweb.com/)
 * [Data Source](https://github.com/authifyWeb/authifyFame-Database)
 * [How we verify](https://github.com/authifyWeb/authifyFame#how-we-verify)
-* [How to Trust](https://github.com/authifyWeb/authifyFame#how-to-trust)
+* [How to Trust](https://github.com/authifyWeb/authifyFame#how-to-trust-the-source)
 * [Disclaimer](https://github.com/authifyWeb/authifyFame#disclaimer)
 * [Copyright](https://github.com/authifyWeb/authifyFame#copyright)
 * [License](https://github.com/authifyWeb/authifyFame#license)
