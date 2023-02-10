@@ -511,8 +511,7 @@ margin-bottom:80px;
   margin-left: -60px;
   opacity: 0;
   transition: opacity 0.3s;
-  overflow: auto;
-  white-space: wrap; 
+ 
 }
 
 .tooltip .tooltiptext::after {
