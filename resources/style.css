@@ -31,16 +31,18 @@
 	box-sizing: border-box;
 	margin: 0px;
 	padding: 0px;
-}
+  
+  }
 
 body{
 	  font-family: 'Montserrat', sans-serif;
 	  background-color: #1f282d; /* #343434*/
     font-weight: 400;
+    z-index:-1;
         
 	}
 
-nav{	position:fixed;
+nav{	position:absolute;
 		top:0; left:0; right:0; 
 		
 		padding-top: 9px;
@@ -266,17 +268,14 @@ margin-bottom:80px;
 /* Typeahead Starts */
 .main_container{
   text-align:center;
-   
-    margin-top:10vh;
+   background-color: #1f282d;
+    margin-top:8vh;
     margin-bottom:5px;
     color:#A2FB15;
     padding-left:10px;
     padding-right:10px;
     z-index: -1;
-    /*height:80vh;*/
-    position: fixed;
-    right: 5px;
-    left: 5px;
+    
   }
   
   
@@ -321,7 +320,7 @@ margin-bottom:80px;
   
   /* override style for all templates */
   .typeahead-standalone.typeahead-sgst .tt-list div[class^="tt-"] {
-    padding: 5px;
+    padding: 1px;
     
   }
   
@@ -477,11 +476,17 @@ margin-bottom:80px;
 #no_promote{
   letter-spacing: 1px;
   font-weight:400;
-  padding-top:80px;
+  padding-top:70px;
   font-size:12px; 
   color:white;
   background-color:#1f282d;
   
+}
+@media (min-width: 320px) and (max-width: 900px) {
+  #no_promote{
+  
+    margin-top:0px;
+  }
 }
 
 .tooltip {
@@ -489,13 +494,12 @@ margin-bottom:80px;
   height:20px;
 
   display: inline-block;
-  padding-bottom:25px;
+  padding-bottom:15px;
   border-bottom: 1px dashed white;
-  
 }
 
 .tooltip .tooltiptext {
-  
+  visibility: hidden;
   font-size:12px;
   font-style:normal;
   width: 120px;
@@ -511,7 +515,6 @@ margin-bottom:80px;
   margin-left: -60px;
   opacity: 0;
   transition: opacity 0.3s;
- 
 }
 
 .tooltip .tooltiptext::after {
@@ -529,4 +532,11 @@ margin-bottom:80px;
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity:1;
+}
+
+#data{
+ 
+  z-index:5;
+  margin-top:12px;
+  overflow-wrap: break-word;
 }

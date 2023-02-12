@@ -1,5 +1,6 @@
 const el = document.querySelector(".searchterm");
 var authData;
+
 /* Initialising typeahead-standalone.js: https://typeahead.digitalfortress.tech/ */
 
 typeahead({
@@ -26,7 +27,7 @@ typeahead({
          return modifiedSource;
     },
     identifier: 'id',
-	identity: (suggestion) => `${suggestion.name}`
+	identity: (suggestion) => `${suggestion.id}`
 },
 
 debounceRemote: 200,
@@ -41,7 +42,7 @@ templates: {
     suggestion: (authifyFame) => (
     `<div  class="single-item">
     <img src="${authifyFame.avatar}?s=50&r=g" />
-    <div class="company_name">${authifyFame.name}</div>
+    <div class="company_name">${authifyFame.id}</div>
     </div>`
     ),
    
@@ -60,7 +61,7 @@ if (selectedSuggestion) {
  document.getElementById('output'),innerHTML ="";
 const myJSON = JSON.stringify(selectedSuggestion);
 const outp=JSON.parse(myJSON);
-const {name, urls, email,supportPage, type, twitter} = outp;
+const {name, urls, type,id} = outp;
 //console.log(myJSON)
 //console.log(outp)
 authData=outp;
@@ -71,23 +72,14 @@ authData=outp;
 
 
 
-document.getElementById('naam').innerHTML = `<p style="font-size:1em;"> Submit URL below to verify whether the site belongs to <span style="color:#DFB014 "> ${name[0]}</span></> </p>`;
 
-var form=`<input type='text' id='link_id' autofocus autocomplete="off" placeholder="Paste the URL"  > `;
-var btn=`<input type="submit" id="search_btn" value="Search 🔍" onClick="searchNow()" > <p style="color:white; font-size:12px; padding-top:2px;">Please use a valid URL format (with https://). Or else no data will be displayed.</p><div class="refresh_btn_box" style="margin-top:5px; margin-bottom:10px;"><button type="button"; onClick="window.location.reload()">Search Another Link </button></div>`;
+
+document.getElementById('naam').innerHTML = `<p style="font-size:1em;"> Submit URL below to verify whether the site belongs to <span style="color:#DFB014 "> ${id} </span></> </p>`;
+
+var form=`<input type='text' id='link_id'  autocomplete="off" placeholder="Paste the URL"  > `;
+var btn=`<input type="submit" id="search_btn" value="Search 🔍" onClick="searchNow()" > <p style="color:white; font-size:12px; padding-top:2px;">Please use a valid URL format (with https://). Or else no data will be displayed.</p><div class="refresh_btn_box" style="margin-top:5px; margin-bottom:5px;"><button type="button"; onClick="window.location.reload()">Search Another Link </button></div> `;
 input_form.innerHTML=form;
 input_btn.innerHTML=btn;
-
-
-/* format to display content back as html
-document.getElementById('nitter').innerHTML = '<a href=' + url +' target="_blank" style="color:green">' +  'Twitter   </a>';	
-
-*/
-
-
-
-
-
 
 
 
@@ -111,6 +103,7 @@ input_form.addEventListener("keydown", (event) => {
      
       case "Enter":
         searchNow();
+        link_id.blur();
         break;
       case "Esc": // IE/Edge specific value
       case "Escape":
@@ -161,16 +154,16 @@ function authification(url, href, origin, hostname,protocol,pathname)
 				return output;
 			}
 	else if(origin=="https://www.youtube.com")
-				{
-					var channel=(pathname.split('/')[1]);
-					if(channel=="channel") { link = hostname +'/' +pathname.split('/')[1]+ '/' + pathname.split('/')[2];}
-					else if(channel=="c") { 
-					var id=pathname.split('/')[2].toLowerCase();
-					link= hostname+'/'+id}
-					else{link=hostname+'/'+pathname.split('/')[1].toLowerCase();}
-					var output = compare(link);	
-					return output;
-				}
+      {
+        var channel=(pathname.split('/')[1]);
+        if(channel=="channel") { link = hostname +'/' +pathname.split('/')[1]+ '/' + pathname.split('/')[2];}
+        else if(channel=="c") { 
+        var id=pathname.split('/')[2].toLowerCase();
+        link= hostname+'/'+id}
+        else{link=hostname+'/'+pathname.split('/')[1].toLowerCase();}
+        var output = compare(link);	
+        return output;
+      }
 	else if( origin=="https://www.twitch.tv" || origin=="https://www.instagram.com" )
 			{
 				link = hostname + pathname.toLowerCase(); 
@@ -212,29 +205,38 @@ function authification(url, href, origin, hostname,protocol,pathname)
 
 function compare(link){
 var json = authData;
-var link=link;
+var new_link=link;
 var cl= json.urls;
 
-//console.log(link)
 for(i=0;i<cl.length;i++){
-  if(json.urls[i]==link)
-  { console.log("Yay")
-    
-    var Data=`<div style="color:white;font-size:12px; background-color:#1f282d">  ` + link + `</br> <p> <span style="color:#A2FB15; font-size: 14px; ">Verified by authifyURL.</span> &nbsp;<span class="tooltip" > ✅ <span class="tooltiptext">This website is valid and legal. </span> </p></br> <p><span style="font-size:15px; color:white;">The page you submitted belongs to: </span> <span style="font-size:16px; color: #E49759">` +json.name[0]+ `</span></p></br></div>` ;
-    
-    var Disclaimer=`Read <a href ="https://github.com/authifyWeb/authifyURL#how-we-verify" style="color:white"; target ="_blank"> how we verify</a> what is valid and what is not. </br> `;
-    data.innerHTML= Data;
-    disclaimer.innerHTML= Disclaimer;
-  
- return Data;
-  }
-  else
-  var Data = `<div style=" color:white; background-color:#1f282d; font-size:12px;" >` + link + `<p><br><span style="color:white;  font-size: 18px;"> The page you submitted doesn't belong to </span><span style="font-size:18px; color: #E49759;">`+ json.name[0]+`</span> &nbsp; <span class="tooltip"> ❌ <span class="tooltiptext">Possibly scam. If unsure please take help from someone you know. </span> </p> </div>` ;
+
+    if(json.urls[i]===link)
+      {console.log("Yay")
+      var Data=`<div style="color:white;font-size:12px; background-color:#1f282d;">  ` + new_link + `</br> <p> <span style="color:#A2FB15; font-size: 14px; ">Verified by authifyURL.</span> &nbsp;<span class="tooltip" > ✅ <span class="tooltiptext">This website is valid and legal. </span> </p></br> <p><span style="font-size:18px; color:white;">The page you submitted belongs to: </span> <span style="font-size:14px; color: #E49759"> <br>` +json.id+ `</span></p></br></div>` ;
+                
+                var Disclaimer=`Read <a href ="https://github.com/authifyWeb/authifyURL#how-we-verify" style="color:white"; target ="_blank"> how we verify</a> what is valid and what is not. </br><div class="refresh_btn_box" style="margin-top:10px"><button type="button"; onClick="window.location.reload()">Search Another Link </button></div> `;
+                data.innerHTML= Data;
+                disclaimer.innerHTML=Disclaimer;
+              return Data;
+      }
+} 
+ 
+    console.log("Nop")
+    var Data = `<div style=" color:white; background-color:#1f282d; font-size:12px;" >` + new_link + `<p><br><span style="color:red;  font-size: 18px;"> The page you submitted doesn't belong to username selected above</span>&nbsp; <span class="tooltip"> ❌ <span class="tooltiptext">Possibly scam. Report the page directly to the owner. </span> </p> </div>` ;
   var Disclaimer=`<br>Read <a href ="https://github.com/authifyWeb/authifyURL#how-we-verify" style="color:white;" target ="_blank"> how we verify</a> what is valid and what is not. </br> `;
-  //data.innerHTML= Data;
+  data.innerHTML= Data;
   disclaimer.innerHTML=Disclaimer;
   return Data;
-}
+
+
+
+
+
+
+
+
+
+
 
 
 
