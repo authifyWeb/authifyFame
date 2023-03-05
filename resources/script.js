@@ -74,7 +74,7 @@ authData=outp;
 
 
 
-document.getElementById('naam').innerHTML = `<p style="font-size:1em;"> Submit URL below to verify whether the site belongs to <span style="color:#DFB014 "> ${id} </span></> </p>`;
+document.getElementById('naam').innerHTML = `<p style="font-size:14px;"> Submit URL below to verify whether the site belongs to <span style="color:#DFB014 "> ${id} </span></> </p>`;
 
 var form=`<input type='text' id='link_id'  autocomplete="off" placeholder="Paste the URL"  > `;
 var btn=`<input type="submit" id="search_btn" value="Search 🔍" onClick="searchNow()" > <p style="color:white; font-size:12px; padding-top:2px;">Please use a valid URL format (with https://). Or else no data will be displayed.</p><div class="refresh_btn_box" style="margin-top:5px; margin-bottom:5px;"><button type="button"; onClick="window.location.reload()">Search Another Link </button></div> `;
@@ -159,7 +159,8 @@ function authification(url, href, origin, hostname,protocol,pathname)
         if(channel=="channel") { link = hostname +'/' +pathname.split('/')[1]+ '/' + pathname.split('/')[2];}
         else if(channel=="c") { 
         var id=pathname.split('/')[2].toLowerCase();
-        link= hostname+'/'+id}
+        link= hostname+'/'+id;}
+        else if(pathname[1]=="@"){link= hostname+'/'+pathname.split('/')[1].replace('@','').toLowerCase();}
         else{link=hostname+'/'+pathname.split('/')[1].toLowerCase();}
         var output = compare(link);	
         return output;
@@ -212,9 +213,9 @@ for(i=0;i<cl.length;i++){
 
     if(json.urls[i]===link)
       {console.log("Yay")
-      var Data=`<div style="color:white;font-size:12px; background-color:#1f282d;">  ` + new_link + `</br> <p> <span style="color:#A2FB15; font-size: 14px; ">Verified by authifyURL.</span> &nbsp;<span class="tooltip" > ✅ <span class="tooltiptext">This website is valid and legal. </span> </p></br> <p><span style="font-size:18px; color:white;">The page you submitted belongs to: </span> <span style="font-size:14px; color: #E49759"> <br>` +json.id+ `</span></p></br></div>` ;
+      var Data=`<div style="color:white;font-size:12px; background-color:#1f282d;">` + new_link + `</br> <p> <span style="color:#A2FB15; font-size: 14px; ">Verified by authifyURL.</span> &nbsp;<span class="tooltip" > ✅ <span class="tooltiptext">This website is valid and legal. </span> </p></br> <p><span style="font-size:14px; color:white;">The page you submitted belongs to: </span> <span style="font-size:14px; color: #E49759"> <br>` +json.id+ `</span></p></br></div>` ;
                 
-                var Disclaimer=`Read <a href ="https://github.com/authifyWeb/authifyURL#how-we-verify" style="color:white"; target ="_blank"> how we verify</a> what is valid and what is not. </br><div class="refresh_btn_box" style="margin-top:10px"><button type="button"; onClick="window.location.reload()">Search Another Link </button></div> `;
+                var Disclaimer=`<div style="font-size:14px;">Read <a href ="https://github.com/authifyWeb/authifyURL#how-we-verify" style="color:white"; target ="_blank"> how we verify</a> what is valid and what is not. </br></div> `;
                 data.innerHTML= Data;
                 disclaimer.innerHTML=Disclaimer;
               return Data;
